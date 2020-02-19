@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+	<style type="text/css">
+		*{padding:0;margin: 0;}
+		body{background-image: url("img/bg.jpg");background-attachment: fixed;min-height: 100vh;background-position-x: right;}
+		#leftSide{margin-top: 20pt;}
+		#leftSide *{color:#03637c; }
+		.uk-container>*{margin: 20pt auto;}
+		#leftSide img{width: 40pt;margin:5pt;}
+		#title>div{letter-spacing: 5pt;}
+		#menu>li{font-size: 18pt;padding: 4pt 10pt;cursor: pointer;margin: 0;}
+		#menu>li[uk-active],#menu li:hover{color: white;background-color:#03637c;}
+		iframe{width:100%;}
+
+	</style>
+
+</head>
+<body uk-grid>
+	<div id="leftSide" class="uk-width-1-4@m">
+		<div class="uk-container">
+			<div id="title" class="uk-text-center">
+				<h1 class="uk-heading-small">黃名首富</h1>
+				<div>馬仔 MA CHAI</div>
+				<div>OFFICIAL WEBSITE</div>			
+			</div>
+
+			<ul id="menu" class="uk-list">
+			    <li uk-active data-page="home">HOME PAGE</li>
+			    <li data-page="about">報社簡介</li>
+			    <li data-page="other">其他野</li>
+			</ul>
+
+			<iframe height="315" src="https://www.youtube.com/embed/c2-L7FXBPt8?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+
+			<div>
+				<a href="https://www.facebook.com/mc.ma.37" target="_blank"><img src="img/fb.png"></a>
+				<a href="https://www.instagram.com/lamma_mark/" target="_blank"><img src="img/ig.png"></a>
+			</div>		
+		</div>
+
+	</div>
+	<div  class="uk-width-3-4@m">
+		<div class="uk-container">
+			<div  id="contents" ></div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		UIkit.util.on('li', 'click', function (call) {
+		    // do something
+		    document.querySelector("li[uk-active]").removeAttribute("uk-active"); 
+		    call.target.setAttribute("uk-active","");
+		    showPage(call.target.getAttribute("data-page"));
+		});
+
+		function showPage(page){
+		    fetch( page +".txt" )
+		    .then( response=>response.text())
+		    .then( data=>contents.innerHTML=data);
+		}
+
+		showPage("home");
+	</script>
+</html>
